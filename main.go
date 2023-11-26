@@ -13,7 +13,9 @@ func init() {
 }
 
 func main() {
-	app := fiber.New()
+	app := fiber.New(fiber.Config{
+		AppName: "BFF Cafe v0.0.1",
+	})
 
 	api := app.Group("/api")
 
