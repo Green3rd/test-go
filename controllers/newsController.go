@@ -65,18 +65,3 @@ func getSomething(c *fiber.Ctx) (err error) {
 	log.Info("Got Cat result with length ", len(result), " with the first text ", result[0].Text)
 	return c.Status(statusCode).JSON(result)
 }
-
-// Post something
-func createSomething(c *fiber.Ctx) (err error) {
-	agent := fiber.Post("<URL>")
-	agent.Body(c.Body()) // set body received by request
-	statusCode, body, errs := agent.Bytes()
-	if len(errs) > 0 {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"errs": errs,
-		})
-	}
-
-	// pass status code and body received by the proxy
-	return c.Status(statusCode).Send(body)
-}
